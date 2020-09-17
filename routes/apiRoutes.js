@@ -12,8 +12,8 @@ const store = require("../db/store")
     router.post("/notes", function(req, res) {
         store
         .addNote(req.body)
-        .then(note => res.json(note))
-        .catch(err => res.status(500).json(err));
+        .then((note) => res.json(note))
+        .catch((err) => res.status(500).json(err));
     });
 
     router.delete("/notes/:id", function(req, res) {
@@ -23,4 +23,4 @@ const store = require("../db/store")
         .catch(err => res.status(500).json(err));
     });
    
- module.exports = router
+ module.exports = router;

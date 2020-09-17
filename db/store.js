@@ -7,11 +7,11 @@ const writeNote = util.promisify(fs.writeFile);
 
 class Store {
     read() {
-        return readNote("db/db.json", "utf8")
+        return readNote("db/db.json", "utf8");
     }
 
     write(note) {
-        return writeNote("db/db.json", JSON.stringify(note))
+        return writeNote("db/db.json", JSON.stringify(note));
     }
 
     getNotes() {
@@ -23,20 +23,22 @@ class Store {
             } catch (error) {
                 parseNotes = [];
             }
+
+            return parseNotes;
         });
     }
 
     addNote(note) {
-        const {title, text} = note
+        const { title, text } = note;
         if (!title || !text) {
-            throw new Error("Title and Text Cannot be Empty!")
+            throw new Error("Title and Text Cannot be Empty!");
         }
 
-        const newNote = {title, text, id: uuidv4()}
+        const newNote = { title, text, id: uuidv4() }
         return this.getNotes()
         .then(notes => [...notes, newNote])
         .then(updateNotes => this.write(updateNotes))
-        .then(() => newNote)
+        .then(() => newNote);
     }
 
     removeNote(id) {
